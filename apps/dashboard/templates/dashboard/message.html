@@ -1,0 +1,41 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+
+    <h1>{{user.first_name}} {{user.last_name}}</h1>
+    <p>Registered at: {{user.created_at | date:'Y-d-m'}}</p>
+    <p>User ID: {{user.id}}</p>
+    <p>Email Address: {{user.email}}</p>
+    <p>Description: {{user.description}}</p>
+
+    <form action="{% url 'save_post' user.id %}" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="message">Leave a message for {{user.first_name}}</label>
+            <textarea name="message" class="form-control" cols="30" rows="5"></textarea>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Post">
+    </form>
+
+    {% for message in messages %}
+        <p>{{message.user.first_name}} {{message.user.last_name}} wrote({{message.created_at|date:'Y-d-m'}})</p>
+        <div class="form-group">      
+            <input type="text" value="{{message.msg_content}}" readonly class="form-control">
+        </div>
+        {%for comment in message.replies.all %}
+            <div class="comment_content">
+                <p>{{comment.user.first_name}} {{comment.user.last_name}} wrote    ({{comment.created_at|date:'Y-d-m'}}) </p> 
+                <p>{{comment.reply_content}}</p>
+            </div>
+        {% endfor %}
+        <div class="comment_form">
+            <form action="{% url 'save_comment' message.id %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <textarea name="comment" class="form-control" cols="30" rows="3" placeholder="Write a comment"></textarea>
+                </div>
+                <input type="submit" class="btn btn-primary" value="Post">
+            </form>
+        </div> 
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,42 @@
+.wrapper{
+    margin: 0 auto;
+    width: 80%;
+}
+.header_title{
+    margin: 10px 0px;
+}
+.left_side{
+    display: inline-block;
+    width: 48%;
+}
+.right_side{
+    display: inline-block;
+    width: 49.4%;
+    text-align: right;
+}
+
+.edit_information{
+    display: inline-block;
+    width: 49.4%;
+    vertical-align: top;
+}
+
+.change_password{
+    display: inline-block;
+    width: 49%;
+    vertical-align: top;
+}
+
+.edit_description{
+    display: inline;
+}
+
+.comment_content{
+    padding-left: 40px;
+}
+.comment_form{
+    padding-left: 40px;
+}
+.error_message{
+    color:red;
+}

@@ -1,0 +1,26 @@
+.form_container{    
+    vertical-align: top;
+    padding: 5px 20px;
+    margin-bottom: 20px;
+    width: 40%;
+}
+.error_message{
+    color: red;
+}
+
+.welcome_message{
+    background-color: silver;
+    border: 3px solid silver;
+    padding: 10px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
+.functionality{
+    display: inline-block;
+    width: 32%;
+    vertical-align: top
+}
+div.center_div{
+    margin: 0 auto;
+}

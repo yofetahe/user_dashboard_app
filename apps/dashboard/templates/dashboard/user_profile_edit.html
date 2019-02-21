@@ -1,0 +1,109 @@
+{% extends 'dashboard/base.html' %}
+
+{% block content %}
+<h1>Edit Profile</h1>
+
+<div class="edit_information">
+    <form action="{% url 'udpate_information' user.id %}" method="POST">
+        {% csrf_token %}
+    
+        <p>Edit Information</p>
+        
+            <div class="form-group">
+                <label for="first_name">First Name</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'first_name' %}
+                            <p class="error_message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="text" class="form-control" name="first_name" value="{{user.first_name}}">
+            </div>
+            <div class="form-group">
+                <label for="last_name">Last Name</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'last_name' %}
+                            <p class="error_message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="text" class="form-control" name="last_name" value="{{user.last_name}}">
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'email' %}
+                            <p class="error_message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="text" class="form-control" name="email" value="{{user.email}}">
+            </div>
+        {% if user_level == '9' %}
+        <div class="form-group">
+            <label for="user_level">User Level</label>
+            {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'user_level' %}
+                            <p class="error_message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            <select class="form-control" name="user_level">
+                <option value="">-</option>
+                <option value="9">Admin</option>
+                <option value="1">Normal</option>
+            </select>
+        </div>
+        {% endif %}
+        <input type="submit" value="Save" class="btn btn-primary">    
+    </form>
+</div>
+
+<div class="change_password">
+    <form action="{% url 'change_password' user.id %}" method="POST">
+        {% csrf_token %}
+    
+        <p>Change Password</p>
+        <div class="form-group">
+                <label for="password">Password</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'password' %}
+                            <p class="error_message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="password" class="form-control" name="password">
+            </div>
+            <div class="form-group">
+                <label for="confirmpw">Confirm PW</label>
+                {% if messages %}
+                    {% for message in messages %}
+                        {% if message.extra_tags == 'confirm_password' %}
+                            <p class="error_message">{{ message }}</p>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+                <input type="password" class="form-control" name="confirmpw">
+            </div>
+        <input type="submit" value="Update Password" class="btn btn-primary">
+    
+    </form>
+</div>
+{% if user_level != 9 %}
+<div class="edit_description">
+    <form action="{% url 'edit_description' user.id %}" method="POST">
+            {% csrf_token %}
+        <div class="form-group">
+            <p>Edit Description</p>
+            <textarea name="description" class="form-control"  cols="30" rows="10"></textarea>
+        </div>
+        <input type="submit" value="Save" class="btn btn-primary">
+    </form>
+</div>
+{% endif %}
+{% endblock %}
